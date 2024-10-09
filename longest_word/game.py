@@ -1,5 +1,6 @@
 import string
 import random
+import requests
 
 class Game:
     def __init__(self) -> list:
@@ -9,7 +10,7 @@ class Game:
     def is_valid(self, word: str) -> bool:
         """Return True if and only if the word is valid, given the Game's grid"""
         li = []
-        if word == '':
+        if word == '' or requests.get(f'https://dictionary.lewagon.com/{word}').json()['found'] == False:
             return False
         else:
             for letter in list(word):
